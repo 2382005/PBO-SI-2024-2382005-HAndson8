@@ -4,15 +4,16 @@ import Entities.ToDoList;
 import Services.ToDoListServices;
 import java.util.Scanner;
 
-public class ToDoListTerminalViews implements ToDoListViews{
-    public static Scanner scanner = new Scanner(System.in);
+public class ToDoListTerminalViewsImpl implements ToDoListViews{
+    public Scanner scanner = new Scanner(System.in);
     private final ToDoListServices todolistServices;
 
-    public ToDoListTerminalView(final ToDoListServices todolistServices) {
+    public ToDoListTerminalViewsImpl(final ToDoListServices todolistServices) {
         this.todolistServices = todolistServices;
-}
-    public static String input(String info) {
-        System.out.print(info + " : ");
+    }
+
+    public String input(String info) {
+        System.out.println(info + " : ");
         var data = scanner.nextLine();
         return data;
     }
@@ -28,7 +29,8 @@ public class ToDoListTerminalViews implements ToDoListViews{
             }
         }
     }
-public void showMainMenu() {
+
+    public void showMainMenu() {
     // infinite loop so the program will always run
     boolean isRunning = true;
     while (isRunning) {
@@ -98,7 +100,8 @@ public void showMainMenu() {
         }
     }
 
-@Override
-void run();
-showMainMenu();
+    @Override
+    public void run() {
+        showMainMenu();
+    }
 }

@@ -17,24 +17,25 @@ public class ToDoListServicesImpl implements ToDoListServices {
 
     @Override
     public void addTodoList(String todo) {
-        if (todo.isEmpty() || todo.isBlank())
+        if (todo.isBlank() || todo.isEmpty()) {
             System.out.printf("Masukkan todo dengan benar");
-        return;
+            return;
+        }
+        ToDoList toDoList = new ToDoList();
+        toDoList.setTodo(todo);
+        todoListRepository.add(toDoList);
     }
-ToDoList todoList = new ToDoList();
-    todoList.setTodo(todo);
-    todoListRepository.add(todoList);
 
     @Override
-    public Boolean removeTodoList(final Integer number, final String todo) {
-        TodoList todoList = new TodoList();
-        todoList.setTodo(todo);
-        todoList.setId(number);
-        return todoListRepository.edit(todoList);
+    public Boolean removeTodoList(final Integer number) {
+        return todoListRepository.remove(number);
     }
 
     @Override
     public Boolean editTodolist(Integer number, String todo) {
-        return null;
+        ToDoList toDoList = new ToDoList();
+        toDoList.setTodo(todo);
+        toDoList.setId(number);
+        return todoListRepository.edit(toDoList);
     }
 }
