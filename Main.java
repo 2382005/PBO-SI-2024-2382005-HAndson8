@@ -1,13 +1,19 @@
 import Repository.ToDoListRepositoryImpl;
 import Repository.TodoListRepository;
+import Repository.TodoListRepositoryDblmpl;
 import Services.ToDoListServices;
 import Services.ToDoListServicesImpl;
 import Views.ToDoListTerminalViewsImpl;
 import Views.ToDoListViews;
+import config.Database;
+
+import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        TodoListRepository todoListRepository = new ToDoListRepositoryImpl();
+        Database database= new Database("databaseku", "root", "", "localhost", "3306");
+        database.setup();
+        TodoListRepository todoListRepository = new TodoListRepositoryDblmpl(database);
         ToDoListServices toDoListServices = new ToDoListServicesImpl(todoListRepository);
         ToDoListViews toDoListViews = new ToDoListTerminalViewsImpl(toDoListServices);
         toDoListViews.run();
